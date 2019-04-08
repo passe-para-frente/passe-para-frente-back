@@ -19,6 +19,7 @@
   "homepage": "https://github.com/passe-para-frente/passe-para-frente-back#readme",
   "dependencies": {
     "@google-cloud/firestore": "^1.2.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "firebase-admin": "^7.2.0",
     "geofire": "^5.0.1"

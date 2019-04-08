@@ -28,6 +28,24 @@ class UsersRoute {
         });
     }
 
+    save(req, res) {
+        let user = req.body;
+        user['created_at'] = new Date();
+        user['updated_at'] = new Date();
+        usersDatabase.add(
+            user
+        ).then(snapshot => {
+            user[id] = snapshot.id;
+            res.send(user);
+        }).catch(err => {
+            console.log('Error while saving user: ', err); 
+           res.status(500).send({
+               message: 'Error while saving user.',
+               content: user
+           });
+        })
+    }
+
 }
 
 module.exports = new UsersRoute();
