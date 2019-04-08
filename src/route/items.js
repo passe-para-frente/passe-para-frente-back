@@ -10,8 +10,8 @@ class ItemRoute {
                 let docSnapshot = doc.data();
                 let item = {
                     id : doc.id,
-                    nome: docSnapshot.nome,
-                    categoria: docSnapshot.categoria
+                    name: docSnapshot.name,
+                    category: docSnapshot.category
                 }
                 itemsArray.push(item);
               });

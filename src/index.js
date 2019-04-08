@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const itemRoute = require('./route/items');
+const usersRoute = require('./route/users');
 
 async function main() {
     /*const document = firestore.doc('/produtos/TxDOdI285Gy7BXJsP5rJ');
@@ -37,6 +38,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/items', itemRoute.list);
+app.get('/users', usersRoute.list);
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
