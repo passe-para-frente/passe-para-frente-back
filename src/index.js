@@ -1,18 +1,10 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const itemRoute = require('./route/items');
 
-const serviceAccount = require('../credential/PasseParaFrente-85f0528d64f1.json');
-var admin = require("firebase-admin");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://passeparafrente-1552317006614.firebaseio.com"
-});
-const Firestore = require('@google-cloud/firestore');
 async function main() {
-    const firestore = admin.firestore();
- 
-    const document = firestore.doc('/produtos/TxDOdI285Gy7BXJsP5rJ');
+    /*const document = firestore.doc('/produtos/TxDOdI285Gy7BXJsP5rJ');
     console.log('Document created');
  
     // Enter new data into the document.
@@ -31,18 +23,20 @@ async function main() {
     // Read the document.
     let doc = await document.get();
     console.log('Read the document');
- 
+    console.log(doc);
+ */
     // Delete the document.
-    await document.delete();
-    console.log('Deleted the document');
- 
+    //await document.delete();
+    //console.log('Deleted the document');
 };
- 
-main().catch(console.error);
+
+app.use(bodyParser());
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
+
+app.get('/items', itemRoute.list);
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
