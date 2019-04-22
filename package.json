@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "firebase-admin": "^7.2.0",
-    "geofire": "^5.0.1"
+    "geofire": "^5.0.1",
+    "helmet": "^3.16.0"
   }
 }
