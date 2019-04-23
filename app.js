@@ -16,6 +16,7 @@ app.get('/', function (req, res) {
 
 app.get('/items', itemRoute.list);
 app.get('/users', usersRoute.list);
+app.get('/users:near', usersRoute.listNear);
 app.post('/users', usersRoute.save);
 
 http.createServer(app).listen(app.get('port'), function(){
