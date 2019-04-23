@@ -1,18 +1,31 @@
 
 const usersDatabase = require("../database/users");
 
-function parseDbUser(doc) {
+function parseDbUserFromSimpleQuery(doc) {
     let docSnapshot = doc.data();
     let user = docSnapshot.d;
     user.id = doc.id;
     user.created_at = user.created_at.toDate();
     user.updated_at = user.updated_at.toDate();
     user.location = {
-        lat: docSnapshot.l.latitude,
-        lon: docSnapshot.l.longitude,
+        lat: user.location.latitude,
+        lon: user.location.longitude,
     }
     return user;
 }
+
+function parseDbUserFromGeoQuery(doc) {
+    let user = doc.data();
+    user.id = doc.id;
+    user.created_at = user.created_at.toDate();
+    user.updated_at = user.updated_at.toDate();
+    user.location = {
+        lat: user.location.latitude,
+        lon: user.location.longitude,
+    }
+    return user;
+}
+
 
 class UsersRoute {
 
@@ -20,7 +33,7 @@ class UsersRoute {
         usersDatabase.list().then(snapshot => {
             let usersArrays = [];
             snapshot.forEach(doc => {
-                usersArrays.push(parseDbUser(doc));
+                usersArrays.push(parseDbUserFromSimpleQuery(doc));
               });
             res.json(usersArrays);
         }).catch(err => {
@@ -37,7 +50,7 @@ class UsersRoute {
         usersDatabase.listNear(lat, lon).then(snapshot => {
             let usersArrays = [];
             snapshot.docs.forEach(doc => {
-                usersArrays.push(parseDbUser(doc));
+                usersArrays.push(parseDbUserFromGeoQuery(doc));
               });
             res.json(usersArrays);
         }).catch(err => {
